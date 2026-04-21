@@ -59,9 +59,7 @@ export default function RegisterPage() {
             <div className="w-full max-w-md">
                 {/* Logo */}
                 <div className="text-center mb-10">
-                    <h1 className="text-5xl font-bold text-teal-400 mb-2">
-                        🎬
-                    </h1>
+                   
                     <h2 className="text-3xl font-bold text-white">MovieHub</h2>
                     <p className="text-gray-400 mt-2">Tạo tài khoản mới</p>
                 </div>
@@ -175,7 +173,7 @@ export default function RegisterPage() {
                             disabled={loading}
                             className="w-full py-3 bg-linear-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 disabled:from-gray-500 disabled:to-gray-600 text-white font-bold rounded-2xl transition transform hover:scale-105 active:scale-95 mt-6"
                         >
-                            {loading ? '⏳ Đang tạo...' : '✨ Tạo Tài Khoản'}
+                            {loading ? 'Đang tạo...' : 'Tạo Tài Khoản'}
                         </button>
                     </form>
 
@@ -191,7 +189,7 @@ export default function RegisterPage() {
                         onClick={() => navigate('/login')}
                         className="w-full py-3 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-bold rounded-2xl transition"
                     >
-                        🔓 Đã có tài khoản? Đăng Nhập
+                        Đã có tài khoản? Đăng Nhập
                     </button>
                 </div>
             </div>

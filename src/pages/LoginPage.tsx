@@ -28,11 +28,11 @@ export default function LoginPage() {
 
         try {
             const user = await userService.login(formData);
-            // Lưu user vào localStorage
+
             localStorage.setItem('user', JSON.stringify(user));
-            // Dispatch event custom để notify thay đổi
+
             window.dispatchEvent(new Event('user-login'));
-            // Điều hướng đến danh sách phim
+
             navigate('/movies');
         } catch (err) {
             setError('Tài khoản hoặc mật khẩu không chính xác');
@@ -47,9 +47,6 @@ export default function LoginPage() {
             <div className="w-full max-w-md">
                 {/* Logo */}
                 <div className="text-center mb-10">
-                    <h1 className="text-5xl font-bold text-teal-400 mb-2">
-                        🎬
-                    </h1>
                     <h2 className="text-3xl font-bold text-white">MovieHub</h2>
                     <p className="text-gray-400 mt-2">
                         Khám phá những bộ phim tuyệt vời
@@ -104,7 +101,7 @@ export default function LoginPage() {
                             disabled={loading}
                             className="w-full py-3 bg-linear-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 disabled:from-gray-500 disabled:to-gray-600 text-white font-bold rounded-2xl transition transform hover:scale-105 active:scale-95"
                         >
-                            {loading ? '⏳ Đang đăng nhập...' : '🔓 Đăng Nhập'}
+                            {loading ? 'Đang đăng nhập...' : 'Đăng Nhập'}
                         </button>
                     </form>
 
@@ -120,18 +117,8 @@ export default function LoginPage() {
                         onClick={() => navigate('/register')}
                         className="w-full py-3 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-bold rounded-2xl transition"
                     >
-                        📝 Chưa có tài khoản? Đăng Ký
+                        Chưa có tài khoản? Đăng Ký
                     </button>
-                </div>
-
-                {/* Demo Info */}
-                <div className="mt-8 p-6 bg-white/5 border border-white/10 rounded-2xl">
-                    <p className="text-gray-400 text-sm text-center">
-                        <span className="text-teal-300 font-semibold">
-                            Demo:
-                        </span>{' '}
-                        john_doe / 123456
-                    </p>
                 </div>
             </div>
         </div>
