@@ -52,7 +52,6 @@ export default function Header() {
                     className="flex items-center gap-4 cursor-pointer"
                     onClick={() => navigate('/movies')}
                 >
-                    <div className="text-4xl">🎬</div>
                     <div>
                         <h1 className="text-2xl font-bold text-gray-800 tracking-tight">
                             MovieHub
@@ -101,15 +100,15 @@ export default function Header() {
                                             className={`inline-block mt-2 px-2 py-1 rounded-full text-xs font-semibold ${user.role === 'ADMIN' ? 'bg-red-100 text-red-700' : 'bg-teal-100 text-teal-700'}`}
                                         >
                                             {user.role === 'ADMIN'
-                                                ? '👨‍💼 Admin'
-                                                : '👤 User'}
+                                                ? ' Admin'
+                                                : ' User'}
                                         </span>
                                     </div>
                                     <button
                                         onClick={handleLogout}
                                         className="w-full text-left px-4 py-3 text-red-600 hover:bg-red-50 font-semibold transition border-t"
                                     >
-                                        🚪 Đăng Xuất
+                                        Đăng Xuất
                                     </button>
                                 </div>
                             )}
@@ -121,13 +120,13 @@ export default function Header() {
                             onClick={() => navigate('/login')}
                             className="px-6 py-2 bg-white text-teal-600 border-2 border-teal-600 rounded-lg font-semibold hover:bg-teal-50 transition"
                         >
-                            🔓 Đăng Nhập
+                            Đăng Nhập
                         </button>
                         <button
                             onClick={() => navigate('/register')}
                             className="px-6 py-2 bg-teal-600 text-white rounded-lg font-semibold hover:bg-teal-700 transition"
                         >
-                            📝 Đăng Ký
+                            Đăng Ký
                         </button>
                     </div>
                 )}

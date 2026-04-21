@@ -11,6 +11,7 @@ import Footer from './component/Footer';
 import ListMoviePage from './pages/ListMoviePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import BookingListPage from './pages/BookingListPage';
 import { type User } from './types/user';
 
 function App() {
@@ -62,9 +63,54 @@ function App() {
                         {/* Protected Routes */}
                         {user ? (
                             <>
+                                {/* Navigation Tabs */}
                                 <Route
                                     path="/movies"
-                                    element={<ListMoviePage />}
+                                    element={
+                                        <>
+                                            <nav className="bg-white border-b border-gray-200 sticky top-0 z-40">
+                                                <div className="max-w-7xl mx-auto px-6 flex gap-8">
+                                                    <a
+                                                        href="/movies"
+                                                        className="py-4 px-2 font-medium border-b-2 border-gray-900 text-gray-900 transition"
+                                                    >
+                                                        Danh sách phim
+                                                    </a>
+                                                    <a
+                                                        href="/bookings"
+                                                        className="py-4 px-2 font-medium border-b-2 border-transparent text-gray-600 hover:text-gray-900 transition"
+                                                    >
+                                                        Lịch sử đặt vé
+                                                    </a>
+                                                </div>
+                                            </nav>
+                                            <ListMoviePage />
+                                        </>
+                                    }
+                                />
+                                <Route
+                                    path="/bookings"
+                                    element={
+                                        <>
+                                            <nav className="bg-white border-b border-gray-200 sticky top-0 z-40">
+                                                <div className="max-w-7xl mx-auto px-6 flex gap-8">
+                                                    <a
+                                                        href="/movies"
+                                                        className="py-4 px-2 font-medium border-b-2 border-transparent text-gray-600 hover:text-gray-900 transition"
+                                                    >
+                                                        Danh sách phim
+                                                    </a>
+                                                    <a
+                                                        href="/bookings"
+                                                        className="py-4 px-2 font-medium border-b-2 border-gray-900 text-gray-900 transition"
+                                                    >
+                                                        Lịch sử đặt vé
+                                                    </a>
+                                                </div>
+                                            </nav>
+                                            <BookingListPage />
+                                        </>
+                                    }
                                 />
                                 <Route
                                     path="/"
