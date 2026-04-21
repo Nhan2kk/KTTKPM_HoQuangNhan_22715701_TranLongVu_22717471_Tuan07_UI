@@ -35,7 +35,7 @@ export const bookingService = {
   },
 
   async getByUserId(userId: number): Promise<BookingResponse[]> {
-    const response = await fetch(`${API_URL}/user/${userId}`);
+    const response = await fetch(`${API_URL}/by-user/${userId}`);
     if (!response.ok) {
       throw new Error(
         `Lỗi tải danh sách đặt vé của người dùng: ${response.statusText}`,

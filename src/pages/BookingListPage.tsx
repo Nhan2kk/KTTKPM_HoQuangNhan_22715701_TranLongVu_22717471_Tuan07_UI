@@ -7,12 +7,16 @@ export default function BookingListPage() {
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState("1");
   const [showAllBookings, setShowAllBookings] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const fetchBookings = async () => {
+  const fetchBookings = async (forceShowAll?: boolean) => {
     try {
       setLoading(true);
+      setError(null);
       let data;
-      if (showAllBookings) {
+      const isShowingAll = forceShowAll !== undefined ? forceShowAll : showAllBookings;
+      
+      if (isShowingAll) {
         data = await bookingService.getAll();
       } else if (userId) {
         data = await bookingService.getByUserId(Number(userId));
@@ -21,8 +25,9 @@ export default function BookingListPage() {
       }
       setBookings(data);
     } catch (error) {
+      const errorMsg = error instanceof Error ? error.message : "Không thể tải danh sách đặt vé";
       console.error("Lỗi tải danh sách đặt vé:", error);
-      alert("❌ Không thể tải danh sách đặt vé!");
+      setError(errorMsg);
     } finally {
       setLoading(false);
     }
@@ -86,7 +91,7 @@ export default function BookingListPage() {
                 />
               </div>
               <button
-                onClick={fetchBookings}
+                onClick={() => fetchBookings()}
                 className="px-6 py-2 bg-gray-900 hover:bg-gray-800 text-white rounded-lg font-medium transition"
               >
                 Tìm kiếm
@@ -108,6 +113,12 @@ export default function BookingListPage() {
       </div>
 
       {/* Content */}
+      {error && (
+        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+          <p className="text-red-700">⚠️ {error}</p>
+        </div>
+      )}
+      
       {loading ? (
         <div className="text-center py-20 text-gray-500">
           Đang tải dữ liệu...
@@ -151,7 +162,7 @@ export default function BookingListPage() {
                   className="border-b border-gray-200 hover:bg-gray-50 transition"
                 >
                   <td className="px-4 py-3 font-mono text-sm text-gray-700">
-                    #{booking.id.slice(0, 8)}
+                    #{booking.id}
                   </td>
                   <td className="px-4 py-3 text-gray-700">{booking.userId}</td>
                   <td className="px-4 py-3 text-gray-700">
