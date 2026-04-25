@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { type Movie, type MovieRequest } from '../types/movie';
 
-const API_BASE_URL = 'http://localhost:8080/api/movies';
+const API_BASE_URL = "http://localhost:8080/api/movies";
 export const movieService = {
     getAll: async (): Promise<Movie[]> => {
         const res = await axios.get(API_BASE_URL);

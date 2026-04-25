@@ -55,13 +55,13 @@ export default function BookingListPage() {
   const getStatusLabel = (status: string) => {
     switch (status) {
       case "CONFIRMED":
-        return "✅ Đã xác nhận";
+        return "Đã xác nhận";
       case "PENDING":
-        return "⏳ Chờ xử lý";
+        return "Chờ xử lý";
       case "FAILED":
-        return "❌ Thất bại";
+        return "Thất bại";
       case "CANCELLED":
-        return "⛔ Đã hủy";
+        return "Đã hủy";
       default:
         return status;
     }

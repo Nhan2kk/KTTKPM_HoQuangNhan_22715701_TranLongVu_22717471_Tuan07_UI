@@ -59,16 +59,16 @@ export default function ListMoviePage() {
     try {
       if (editingMovie) {
         await movieService.update(editingMovie.id, data);
-        alert("✅ Cập nhật phim thành công!");
+        alert("Cập nhật phim thành công!");
       } else {
         await movieService.create(data);
         alert(
-          "✅ Tạo phim thành công! Event CREATED đã được gửi qua RabbitMQ.",
+          "Tạo phim thành công! Event CREATED đã được gửi qua RabbitMQ.",
         );
       }
       fetchMovies();
     } catch (error) {
-      alert("❌ Thao tác thất bại!");
+      alert("Thao tác thất bại!");
       console.error(error);
     }
   };
@@ -78,10 +78,10 @@ export default function ListMoviePage() {
 
     try {
       await movieService.delete(id);
-      alert("✅ Xóa phim thành công! Event DELETED đã được gửi.");
+      alert("Xóa phim thành công! Event DELETED đã được gửi.");
       fetchMovies();
     } catch (error) {
-      alert("❌ Xóa phim thất bại");
+      alert("Xóa phim thất bại");
     }
   };
 
