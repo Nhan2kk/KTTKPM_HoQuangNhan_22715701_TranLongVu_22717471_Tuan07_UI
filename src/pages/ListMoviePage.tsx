@@ -62,26 +62,12 @@ export default function ListMoviePage() {
         alert("Cập nhật phim thành công!");
       } else {
         await movieService.create(data);
-        alert(
-          "Tạo phim thành công! Event CREATED đã được gửi qua RabbitMQ.",
-        );
+        alert("Tạo phim thành công! Event CREATED đã được gửi qua RabbitMQ.");
       }
       fetchMovies();
     } catch (error) {
       alert("Thao tác thất bại!");
       console.error(error);
-    }
-  };
-
-  const handleDelete = async (id: string, title: string) => {
-    if (!confirm(`Bạn có chắc muốn xóa phim "${title}" không?`)) return;
-
-    try {
-      await movieService.delete(id);
-      alert("Xóa phim thành công! Event DELETED đã được gửi.");
-      fetchMovies();
-    } catch (error) {
-      alert("Xóa phim thất bại");
     }
   };
 
@@ -101,9 +87,9 @@ export default function ListMoviePage() {
           />
           <button
             onClick={openCreateModal}
-            className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-3 rounded-lg font-medium transition whitespace-nowrap"
+            className="bg-black hover:bg-gray-800 text-white px-8 py-3 rounded-lg font-medium transition whitespace-nowrap"
           >
-            + Thêm phim
+            Thêm phim
           </button>
         </div>
       </div>
