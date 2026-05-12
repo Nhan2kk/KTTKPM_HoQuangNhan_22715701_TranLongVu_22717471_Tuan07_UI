@@ -1,73 +1,64 @@
-# React + TypeScript + Vite
+# Movie Ticket System — Frontend (EDA Integration)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Môn:** Kiến trúc và Thiết kế Phần mềm | **Tuần 07**
 
-Currently, two official plugins are available:
+| Thành viên    | MSSV     |
+| ------------- | -------- |
+| Hồ Quang Nhân | 22715701 |
+| Trần Long Vũ  | 22717471 |
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Tổng quan
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Giao diện người dùng được thiết kế để tương tác mượt mà với hệ thống **Event-Driven Architecture**. Đặc biệt, các luồng đặt vé được xử lý bất đồng bộ (Asynchronous), giúp tối ưu hóa trải nghiệm người dùng và khả năng chịu tải của hệ thống.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Phân công (Frontend)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Hồ Quang Nhân — 22715701
+- **Giao diện Movie & Auth:**
+    - Trang chủ hiển thị danh sách phim được đồng bộ từ Movie Service.
+    - Form Đăng nhập/Đăng ký tích hợp với User Service.
+    - Xử lý các luồng dữ liệu đồng bộ (Synchronous) cho thông tin phim và người dùng.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Trần Long Vũ — 22717471
+- **Giao diện Booking & Async Status:**
+    - Trang chọn ghế và thực hiện đặt vé (gửi yêu cầu đến Booking Service).
+    - Xử lý trạng thái chờ (Loading/Pending) trên UI trong khi hệ thống xử lý sự kiện qua RabbitMQ.
+    - Trang kết quả đặt vé và hiển thị thông báo trạng thái giao dịch từ Payment Notification Service.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Trải nghiệm người dùng trong EDA
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Trong hệ thống hướng sự kiện, trải nghiệm đặt vé diễn ra như sau:
+1. **Gửi yêu cầu:** Người dùng nhấn "Xác nhận đặt vé".
+2. **Xác nhận tức thì:** Frontend nhận phản hồi "Đã tiếp nhận yêu cầu" ngay lập tức từ `Booking Service`.
+3. **Xử lý nền:** Backend xử lý logic thanh toán và thông báo qua hàng đợi sự kiện.
+4. **Cập nhật trạng thái:** Giao diện hiển thị trạng thái xử lý bất đồng bộ, mang lại cảm giác hệ thống phản hồi cực nhanh ngay cả khi đang chịu tải cao.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## Cách chạy
+
+1. **Cài đặt dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Chạy ứng dụng:**
+   ```bash
+   npm run dev
+   ```
+
+3. **Truy cập:** `http://localhost:5173`
+
+---
+
+## Kết nối API
+
+Frontend kết nối tập trung qua:
+- **Base URL:** `http://localhost:8080` (API Gateway)
+- **Kiểu giao tiếp:** REST API (Async for Booking)
